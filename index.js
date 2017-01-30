@@ -131,6 +131,7 @@ co(function *() {
             
             // Now we've merged the same tasks together, loop round and form a single array
             let allItems = [ ]
+            let totalDuration = 0
             for (var pid in projects) {
                 if (projects.hasOwnProperty(pid)) {
                     let project = projects[pid]
@@ -141,6 +142,7 @@ co(function *() {
                             // Set the project name on the item and add the item
                             item.project = projects[pid].name
                             allItems.push(item)
+                            totalDuration += item.duration
                         }
                     }
                 }
@@ -269,7 +271,7 @@ co(function *() {
                         // Create a work log for each item
                         co(function *() {
                             console.log("")
-                            console.log("Joggl is about to create " + allItems.length + " work log(s) for you.")
+                            console.log("Joggl is about to create " + allItems.length + " work log(s) with a total time of " + chalk.bold(moment.utc(totalDuration).format("HH:mm:ss")) + ".")
                             let ok = yield prompt.confirm("Are you sure? (y/n): ")
                             
                             // Exit now if we said no
