@@ -19,7 +19,7 @@ program
 
 function findJiraIds(string) {
     // Match
-    var m = string.match(/([A-Z]*[0-9]{4}-[0-9]*)/g)
+    var m = string.match(/([a-zA-Z][a-zA-Z0-9_]+-[1-9][0-9]*)([^.]|\.[^0-9]|\.$|$)/g)
 
     if (!m) {
         return []
